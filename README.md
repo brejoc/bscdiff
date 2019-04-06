@@ -17,7 +17,22 @@ Output is structure like this:
 
 \<line in source.changes\>: \<bsc missing in target.changes\> -> \<line from source.changes\>
 
+# Patterns
+
+bscdiff looks for the following patterns:
+
+* bsc#12345
+* CVE-2019-12356
+* U#1234
 
 ## Building bscdiff
 
 Since no external dependency was used, you can just do a `go build bscdiff.go`.
+
+# Issues and Contributions
+
+If you've got issues or questions please don't hesitate to open an issue. If you'd like to improve something or found a bug and you want to fix it, just open a pull request.
+
+## License
+
+MIT
