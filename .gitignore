@@ -13,3 +13,6 @@
 
 # Generated binary
 bscdiff
+
+# Test changelogs
+# *.changes*
