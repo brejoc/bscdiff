@@ -85,9 +85,7 @@ func findMissingBsc(changelog1 []searchResult, changelog2 []searchResult) []stri
 	var missingBscs []string
 	for _, bsc := range bscList1 {
 		searchPos := sort.SearchStrings(bscList2, bsc)
-		if searchPos < len(bscList2) && bscList2[searchPos] == bsc {
-			// found it
-		} else {
+		if searchPos >= len(bscList2) || (searchPos < len(bscList2) && bscList2[searchPos] != bsc) {
 			missingBscs = append(missingBscs, bsc)
 		}
 	}
