@@ -1,6 +1,6 @@
 # bscdiff
 
-bscdiff compares bsc, issue and CVE numbers from a source changelog, to a target changelog. Missing numbers are then printed with their occurrence in the source changelog.
+bscdiff compares bsc, issue, fate (it's a SUSE thing) and CVE numbers from a source changelog, to a target changelog. Missing numbers are then printed with their occurrence in the source changelog.
 
 
 ## Usage
@@ -24,6 +24,7 @@ bscdiff looks for the following patterns:
 * bsc#12345
 * CVE-2019-12356
 * U#1234
+* fate#12345
 
 ## Building bscdiff
 
