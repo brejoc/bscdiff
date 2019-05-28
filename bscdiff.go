@@ -26,6 +26,7 @@ func main() {
 	// These are the regex-strings that will be used later on.
 	regexStrings = []string{
 		`bsc#\d*`,
+		`fate#\d*`,
 		`U#\d*`,
 		`(CVE-(1999|2\d{3})-(0\d{2}[1-9]|[1-9]\d{3,}))`}
 
