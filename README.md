@@ -38,6 +38,6 @@ For openSUSE you can [download packages from OBS](https://software.opensuse.org/
 
 If you've got issues or questions please don't hesitate to open an issue. If you'd like to improve something or found a bug and you want to fix it, just open a pull request.
 
-## License
+# License
 
 MIT
