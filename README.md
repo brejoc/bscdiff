@@ -17,7 +17,7 @@ Output is structure like this:
 
 \<line in source.changes\>: \<bsc missing in target.changes\> -> \<line from source.changes\>
 
-# Patterns
+## Patterns
 
 bscdiff looks for the following patterns:
 
@@ -29,6 +29,10 @@ bscdiff looks for the following patterns:
 ## Building bscdiff
 
 Since no external dependency was used, you can just do a `go build bscdiff.go`.
+
+## Installation
+
+For openSUSE you can [download packages from OBS](https://software.opensuse.org//download.html?project=home%3Abrejoc%3Abscdiff&package=bscdiff), or you can download the binaries for Linux(amd64) and FreeBSD(amd64) from the [releases](https://github.com/brejoc/bscdiff/releases).
 
 # Issues and Contributions
 
