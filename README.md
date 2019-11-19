@@ -6,7 +6,7 @@ bscdiff compares bsc, issue, fate (it's a SUSE thing) and CVE numbers from a sou
 ## Usage
 
 ```
-brejoc@alpha ~> ./bscdiff source.changes target.changes
+$ ./bscdiff source.changes target.changes
 508: bsc#1098394 -> - Fix file.get_diff regression on 2018.3 (bsc#1098394)
 525: bsc#1098394 -> - Fix file.managed binary file utf8 error (bsc#1098394)
 4092: bsc#565656565 -> - uploaded to salt 1.12.0 (bsc#565656565, bsc#676767676)
@@ -28,7 +28,7 @@ bscdiff looks for the following patterns:
 
 ## Building bscdiff
 
-Since no external dependency was used, you can just do a `go build bscdiff.go`.
+Since Go modules are used and everything is vendorized, a simple `go build` should be enough. But you need the devel lib of seccomp: libseccomp-dev on Debian based systemes and libseccomp-devel on openSUSE or Redhat based systems.
 
 ## Installation
 
