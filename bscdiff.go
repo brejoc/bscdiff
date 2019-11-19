@@ -14,6 +14,12 @@ import (
 	"sort"
 )
 
+func init() {
+	// The syscall restriciton is only available for Linux right now via
+	// seccomp.
+	applySyscallRestrictions()
+}
+
 type searchResult struct {
 	line  int
 	match []string
