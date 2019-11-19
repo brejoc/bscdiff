@@ -1,0 +1,33 @@
+package main
+
+import (
+	"bytes"
+	"testing"
+)
+
+func TestPrettyPrintMissingBscs(t *testing.T) {
+	var res1 []searchResult
+
+	res1 = append(res1,
+		searchResult{
+			line:  1,
+			match: []string{"bsc#123"},
+			text:  "Line in text with bsc#123",
+		},
+	)
+	res1 = append(res1,
+		searchResult{
+			line:  2,
+			match: []string{"bsc#321"},
+			text:  "Line in text with bsc#321",
+		},
+	)
+
+	buffer := &bytes.Buffer{}
+	prettyPrintMissingBscs(res1, []string{"bsc#321"}, buffer)
+	got := buffer.String()
+	want := "2: bsc#321 -> Line in text with bsc#321\n"
+	if got != want {
+		t.Errorf("got \"%s\", wanted \"%s\"", got, want)
+	}
+}
