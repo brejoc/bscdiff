@@ -9,6 +9,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"regexp"
 	"sort"
@@ -29,6 +30,8 @@ type searchResult struct {
 var regexStrings []string
 
 func main() {
+	var out io.Writer = os.Stdout // needed to redirect output for testing
+
 	// These are the regex-strings that will be used later on.
 	regexStrings = []string{
 		`bsc#\d*`,
@@ -64,20 +67,20 @@ func main() {
 	searchResults1 := scanFile(args[1])
 	searchResults2 := scanFile(args[2])
 	missingBscs := findMissingBsc(searchResults1, searchResults2)
-	prettyPrintMissingBscs(searchResults1, missingBscs)
+	prettyPrintMissingBscs(searchResults1, missingBscs, out)
 }
 
 // Outputs the missing BSC numbers in a useful format.
-func prettyPrintMissingBscs(searchResults1 []searchResult, missingBscs []string) {
+func prettyPrintMissingBscs(searchResults1 []searchResult, missingBscs []string, out io.Writer) {
 	sort.Strings(missingBscs)
 	for _, bsc := range missingBscs {
 		for _, searchResult := range searchResults1 {
 			searchPos := sort.SearchStrings(searchResult.match, bsc)
 			if searchPos < len(searchResult.match) && searchResult.match[searchPos] == bsc {
-				fmt.Println(fmt.Sprintf("%d: %s -> %s",
+				fmt.Fprintf(out, "%d: %s -> %s\n",
 					searchResult.line,
 					bsc,
-					searchResult.text))
+					searchResult.text)
 			}
 		}
 	}
