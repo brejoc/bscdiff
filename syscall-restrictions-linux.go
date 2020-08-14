@@ -10,11 +10,14 @@ import (
 )
 
 func applySyscallRestrictions() {
-	var syscalls = []string{"read", "write", "close", "mmap", "munmap",
-		"rt_sigaction", "rt_sigprocmask", "clone", "execve", "sigaltstack",
-		"arch_prctl", "gettid", "futex", "sched_getaffinity", "epoll_ctl",
-		"openat", "newfstatat", "readlinkat", "pselect6", "epoll_pwait",
-		"epoll_create1", "exit_group"}
+
+	var syscalls = []string{"read", "write", "close", "fstat", "mmap",
+		"mprotect", "munmap", "brk", "rt_sigaction", "rt_sigprocmask",
+		"access", "nanosleep", "clone", "execve", "uname", "fcntl",
+		"sigaltstack", "arch_prctl", "gettid", "futex", "sched_getaffinity",
+		"set_tid_address", "epoll_ctl", "openat", "newfstatat",
+		"readlinkat", "set_robust_list", "epoll_create1", "pipe2",
+		"prlimit64", "exit_group"}
 	whiteList(syscalls)
 }
 
