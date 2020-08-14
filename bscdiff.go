@@ -64,8 +64,23 @@ func main() {
 		}
 	}
 
-	searchResults1 := scanFile(args[1])
-	searchResults2 := scanFile(args[2])
+	c1 := make(chan []searchResult)
+	c2 := make(chan []searchResult)
+	var searchResults1 []searchResult
+	var searchResults2 []searchResult
+
+	go scanFile(args[1], c1)
+	go scanFile(args[2], c2)
+
+	for i := 0; i < 2; i++ {
+		select {
+		case msg1 := <-c1:
+			searchResults1 = msg1
+		case msg2 := <-c2:
+			searchResults2 = msg2
+		}
+	}
+
 	missingBscs := findMissingBsc(searchResults1, searchResults2)
 	prettyPrintMissingBscs(searchResults1, missingBscs, out)
 }
@@ -115,7 +130,7 @@ func getBscs(res []searchResult) []string {
 }
 
 // Scans the file for bsc, CVE and issue numbers and returns the search results.
-func scanFile(pathToFile string) []searchResult {
+func scanFile(pathToFile string, ch chan<- []searchResult) {
 	var regexes []*regexp.Regexp
 	// creating the regexes with the regex-strings from main().
 	for _, regexString := range regexStrings {
@@ -139,7 +154,7 @@ func scanFile(pathToFile string) []searchResult {
 			}
 		}
 	}
-	return searchResults
+	ch <- searchResults
 }
 
 // Returns the given file as an array of lines.
