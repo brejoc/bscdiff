@@ -10,6 +10,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 	"regexp"
 	"sort"
@@ -57,9 +58,15 @@ func main() {
 	}
 
 	// Check if files are actually there… and files.
+	// And if these files are readable.
 	for _, file := range os.Args[1:3] {
 		if !fileExists(file) {
 			fmt.Fprintf(os.Stderr, "%s does not exist!", file)
+			os.Exit(1)
+		}
+
+		if !fileIsReadable(file) {
+			fmt.Fprintf(os.Stderr, "%s can't be read!", file)
 			os.Exit(1)
 		}
 	}
@@ -198,4 +205,14 @@ func fileExists(filename string) bool {
 		return false
 	}
 	return !info.IsDir()
+}
+
+// fileIsReadable checks if a file is readable
+// try using it to prevent further errors.
+func fileIsReadable(filename string) bool {
+	_, err := ioutil.ReadFile("testdata/hello")
+	if err != nil {
+		return false
+	}
+	return true
 }
