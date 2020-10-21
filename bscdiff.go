@@ -210,7 +210,7 @@ func fileExists(filename string) bool {
 // fileIsReadable checks if a file is readable
 // try using it to prevent further errors.
 func fileIsReadable(filename string) bool {
-	_, err := ioutil.ReadFile("testdata/hello")
+	_, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return false
 	}
