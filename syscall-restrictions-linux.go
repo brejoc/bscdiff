@@ -1,3 +1,4 @@
+//go:build linux
 // +build linux
 
 package main
@@ -8,6 +9,12 @@ import (
 
 	libseccomp "github.com/seccomp/libseccomp-golang"
 )
+
+func init() {
+	// The syscall restriciton is only available for Linux right now via
+	// seccomp.
+	applySyscallRestrictions()
+}
 
 func applySyscallRestrictions() {
 
