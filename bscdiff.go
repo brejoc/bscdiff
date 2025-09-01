@@ -53,7 +53,7 @@ func main() {
 	// Check if files are actually there… and files.
 	for _, file := range os.Args[1:3] {
 		if !fileExists(file) {
-			fmt.Fprintf(os.Stderr, "%s does not exist!", file)
+			fmt.Fprintf(os.Stderr, "'%s' does not exist!", file)
 			os.Exit(1)
 		}
 	}
@@ -133,7 +133,8 @@ func scanFile(pathToFile string, ch chan<- []searchResult) {
 	}
 	lines, err := scanLines(pathToFile)
 	if err != nil {
-		panic(err)
+		fmt.Fprintf(os.Stderr, "'%s' could not be opened.", pathToFile)
+		os.Exit(1)
 	}
 	var searchResults []searchResult
 	for i, line := range lines {
